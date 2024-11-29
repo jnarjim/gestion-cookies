@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Cookies</title>
+</head>
+<body>
+    <h1>Bienvenido a la página de gestión de cookies</h1>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div style="color: green; margin: 10px 0;">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    {% if not cookie_consent %}
+    <!-- Banner de cookies si no hay consentimiento -->
+    <div>
+        <p>Consulta la
+            <a href="{{ url_for('policy') }}">política de cookies</a>.
+        </p>
+        <form method="GET" action="{{ url_for('consent') }}">
+            <button type="submit">Configurar cookies</button>
+        </form>
+    </div>
+    {% elif cookie_consent == 'accepted' %}
+    <p>Has aceptado el uso de cookies.</p>
+    <form method="POST" action="{{ url_for('change_consent') }}">
+        <button type="submit">Cambiar mi decisión</button>
+    </form>
+    {% elif cookie_consent == 'rejected' %}
+    <p>Has rechazado el uso de cookies.</p>
+    <form method="POST" action="{{ url_for('change_consent') }}">
+        <button type="submit">Cambiar mi decisión</button>
+    </form>
+    {% endif %}
+</body>
+</html>

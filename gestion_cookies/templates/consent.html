@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consentimiento de Cookies</title>
+</head>
+<body>
+    <h1>Configura tu preferencia de cookies</h1>
+    <form method="POST" action="{{ url_for('consent') }}">
+        <button type="submit" name="consent" value="accept">Aceptar Cookies</button>
+        <button type="submit" name="consent" value="reject">Rechazar Cookies</button>
+    </form>
+</body>
+</html>
